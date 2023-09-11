@@ -3,7 +3,7 @@
 use crate::error_from;
 use hyper::header::ToStrError;
 use mime::FromStrError;
-use serde_json::json;
+
 use std::env::VarError;
 use std::error::Error as StdError;
 use std::fmt;
