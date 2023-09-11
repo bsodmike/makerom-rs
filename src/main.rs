@@ -1,15 +1,36 @@
 use error::Error;
-use std::{fs::File, path::Path};
+use std::path::Path;
 use tokio::io::AsyncWriteExt;
 
 pub mod error;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    let bytes: Vec<u8> = vec![];
-
     let current = std::env::current_dir().expect("Current path");
-    let output_path = current.join(Path::new("output"));
+    let output_path = current.join(Path::new("rom.bin"));
+
+    let mut rom: Vec<u8> = vec![
+        0xa9, 0xff, // lda ff
+        0x8d, 0x02, 0x60, // sta 6002
+        //
+        0xa9, 0x55, // lda 55
+        0x8d, 0x00, 0x60, // sta 6000
+        //
+        0xa9, 0xaa, // lda aa
+        0x8d, 0x02, 0x60, // sta 6002
+        //
+        0x4c, 0x05, 0x80, // jmp 8005
+    ];
+
+    let remaining = 32768 - rom.len();
+    for _ in 0..remaining {
+        rom.push(0xea);
+    }
+
+    rom[0x7ffc] = 0x00;
+    rom[0x7ffd] = 0x80; // little endian for 6502
+
+    save_bytes_to_disk(output_path, rom).await?;
 
     Ok(())
 }
