@@ -1,3 +1,7 @@
+//! This crate lets you write bytes directly to disk, to flash to your
+#![warn(rust_2018_idioms)]
+#![cfg_attr(docsrs, feature(doc_cfg))]
+
 use error::Error;
 use std::path::Path;
 use tokio::io::AsyncWriteExt;
