@@ -2,14 +2,14 @@
 #![warn(rust_2018_idioms)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
-use error::Error;
+use error::{Error, Result};
 use std::path::Path;
 use tokio::io::AsyncWriteExt;
 
 pub mod error;
 
 #[tokio::main]
-async fn main() -> anyhow::Result<()> {
+async fn main() -> Result<()> {
     let current = std::env::current_dir().expect("Current path");
     let output_path = current.join(Path::new("rom.bin"));
 
