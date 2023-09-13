@@ -2,7 +2,7 @@
 #![warn(rust_2018_idioms)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
-use error::{Error, Result};
+use error::Result;
 use std::path::Path;
 use tokio::io::AsyncWriteExt;
 
@@ -39,7 +39,7 @@ async fn main() -> Result<()> {
     Ok(())
 }
 
-async fn save_bytes_to_disk<P, D>(path: P, data: D) -> Result<(), Error>
+async fn save_bytes_to_disk<P, D>(path: P, data: D) -> Result<()>
 where
     P: AsRef<std::path::Path>,
     D: AsRef<[u8]>,
