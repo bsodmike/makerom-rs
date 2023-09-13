@@ -13,3 +13,4 @@ $ hexdump -C rom.bin
 00007ff0  ea ea ea ea ea ea ea ea  ea ea ea ea 00 80 ea ea  |................|
 00008000
 ```
+
